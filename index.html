@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vulcan &amp; Anvil</title>
+<meta name="description" content="Two open-source CLIs that detect your real hardware and generate a sized Docker Compose stack - Vulcan for media homelabs, Anvil for local AI.">
+<meta property="og:title" content="Vulcan &amp; Anvil">
+<meta property="og:description" content="Two open-source CLIs that detect your real hardware and generate a sized Docker Compose stack - Vulcan for media homelabs, Anvil for local AI.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@500;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------------------------------------------------------------
+     Tokens - dark-first (a forge is a dark room lit by two heat
+     sources). Bare :root holds the dark palette; the light palette
+     lives under prefers-color-scheme:light and [data-theme="light"],
+     the swapped mirror of the usual light-first pattern.
+  ----------------------------------------------------------------- */
+  :root {
+    --ground: #17130f;
+    --surface: #221b15;
+    --surface-2: #2c2318;
+    --ink: #f4ece0;
+    --muted: #b3a28d;
+    --line: #3c3226;
+
+    --ember: #ff5f1f;
+    --ember-strong: #ffa15c;
+    --ember-soft: rgba(255, 95, 31, 0.2);
+    --ember-ink: #260f04;
+
+    --temper: #2f97f0;
+    --temper-strong: #7cc2fa;
+    --temper-soft: rgba(47, 151, 240, 0.2);
+    --temper-ink: #05182b;
+
+    --focus: #ffd166;
+
+    /* Fixed, theme-independent - the terminal block's own background
+       is always dark (a terminal is a terminal), so its command-
+       highlight color must not swap to the light theme's darker
+       --ember/--temper-strong shades, which would go dark-on-dark. */
+    --ember-bright: #ff8a42;
+    --temper-bright: #5cb0f5;
+
+    --font-display: "Big Shoulders", "Arial Narrow", sans-serif;
+    --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ground: #f1ece1;
+      --surface: #e9e0cd;
+      --surface-2: #ded2b8;
+      --ink: #211a11;
+      --muted: #6c5c47;
+      --line: #c9ba9b;
+
+      --ember: #d63d0a;
+      --ember-strong: #a4300a;
+      --ember-soft: rgba(214, 61, 10, 0.15);
+      --ember-ink: #fff5ec;
+
+      --temper: #1466c2;
+      --temper-strong: #124f96;
+      --temper-soft: rgba(20, 102, 194, 0.15);
+      --temper-ink: #eef5fc;
+    }
+  }
+
+  :root[data-theme="light"] {
+    --ground: #f1ece1;
+    --surface: #e9e0cd;
+    --surface-2: #ded2b8;
+    --ink: #211a11;
+    --muted: #6c5c47;
+    --line: #c9ba9b;
+
+    --ember: #d63d0a;
+    --ember-strong: #a4300a;
+    --ember-soft: rgba(214, 61, 10, 0.15);
+    --ember-ink: #fff5ec;
+
+    --temper: #1466c2;
+    --temper-strong: #124f96;
+    --temper-soft: rgba(20, 102, 194, 0.15);
+    --temper-ink: #eef5fc;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+  }
+
+  /* ---------------------------------------------------------------
+     Top bar
+  ----------------------------------------------------------------- */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .topbar .mark { color: var(--ink); font-weight: 600; }
+
+  /* ---------------------------------------------------------------
+     Hero
+  ----------------------------------------------------------------- */
+  .hero {
+    position: relative;
+    padding: 4.5rem 0 3.5rem;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 26rem;
+    background:
+      radial-gradient(38rem 16rem at 22% 30%, var(--ember-soft), transparent 65%),
+      radial-gradient(30rem 14rem at 78% 20%, var(--temper-soft), transparent 65%);
+    pointer-events: none;
+    opacity: 0.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-glow { animation: breathe 7s ease-in-out infinite alternate; }
+  }
+  @keyframes breathe {
+    from { opacity: 0.65; transform: translateY(0); }
+    to   { opacity: 1;    transform: translateY(-6px); }
+  }
+
+  .eyebrow {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1.1rem;
+  }
+
+  h1 {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(2.6rem, 6.4vw, 5.1rem);
+    line-height: 0.96;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.3rem;
+    text-wrap: balance;
+  }
+
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(95deg, var(--ember) 0%, var(--ember) 48%, var(--temper) 52%, var(--temper) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero p.lede {
+    position: relative;
+    max-width: 62ch;
+    font-size: 1.14rem;
+    color: var(--ink);
+    opacity: 0.86;
+    margin: 0;
+  }
+
+  .hero p.lede b { color: var(--ink); opacity: 1; font-weight: 600; }
+
+  /* ---------------------------------------------------------------
+     Method strip - a real sequence (detect happens before recommend
+     happens before generate), so the arrowed order carries real
+     information, not decoration.
+  ----------------------------------------------------------------- */
+  .method {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 0.9rem;
+    margin: 2.4rem 0 0;
+    padding: 1rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .method .step { color: var(--ink); }
+  .method .arrow { color: var(--line); font-size: 1rem; }
+
+  /* ---------------------------------------------------------------
+     Forge floor - the two stations
+  ----------------------------------------------------------------- */
+  .floor {
+    padding: 1rem 0 4rem;
+  }
+
+  .stations {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  @media (min-width: 860px) {
+    .stations { grid-template-columns: 1fr 1fr; }
+  }
+
+  .station {
+    --accent: var(--ember);
+    --accent-strong: var(--ember-strong);
+    --accent-soft: var(--ember-soft);
+    --accent-ink: var(--ember-ink);
+
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    clip-path: polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+    padding: 2rem 1.9rem 1.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+
+  .station.anvil {
+    --accent: var(--temper);
+    --accent-strong: var(--temper-strong);
+    --accent-soft: var(--temper-soft);
+    --accent-ink: var(--temper-ink);
+  }
+
+  .station::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--accent-soft), transparent 40%);
+    pointer-events: none;
+  }
+
+  .station-head {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .station-icon {
+    flex: none;
+    width: 2.6rem;
+    height: 2.6rem;
+    color: var(--accent);
+  }
+  .station-icon svg { width: 100%; height: 100%; }
+
+  .station h2 {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 4.4vw, 2.6rem);
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin: 0.3rem 0 0.2rem;
+    color: var(--ink);
+  }
+
+  .station .kicker {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.15rem;
+  }
+
+  .station .desc {
+    position: relative;
+    margin: 0;
+    color: var(--ink);
+    opacity: 0.88;
+    font-size: 1rem;
+    max-width: 42ch;
+  }
+
+  .chips {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chips li {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    background: var(--surface-2);
+  }
+
+  .tiers {
+    position: relative;
+    display: flex;
+    gap: 1.4rem;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding-top: 0.2rem;
+    border-top: 1px solid var(--line);
+  }
+  .tiers b { color: var(--ink); display: block; font-size: 0.95rem; font-weight: 600; }
+  .tiers span.axis { display: block; margin-top: 0.15rem; }
+
+  pre.term {
+    position: relative;
+    margin: 0;
+    padding: 0.95rem 1.05rem;
+    background: #0f0c09;
+    border: 1px solid var(--line);
+    color: #d9cfc0;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.65;
+    overflow-x: auto;
+  }
+  pre.term .p { color: var(--ember-bright); }
+  .station.anvil pre.term .p { color: var(--temper-bright); }
+  pre.term .c { opacity: 0.6; }
+
+  .station a.cta {
+    position: relative;
+    align-self: flex-start;
+    margin-top: 0.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+  .station a.cta:hover {
+    background: var(--accent-strong);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px -4px var(--accent-soft);
+  }
+  .station a.cta svg { width: 1em; height: 1em; }
+
+  /* ---------------------------------------------------------------
+     Footer
+  ----------------------------------------------------------------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 1.8rem 0 2.6rem;
+  }
+  footer p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    max-width: 68ch;
+  }
+  footer .links {
+    margin-top: 0.7rem;
+    display: flex;
+    gap: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+  footer .links a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  footer .links a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="wrap topbar">
+  <span><span class="mark">FORGE&nbsp;WORKS</span> — self-hosted homelab deployers</span>
+  <span>MIT &middot; open source</span>
+</div>
+
+<div class="hero wrap">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <p class="eyebrow">Two tools, one detection-first method</p>
+  <h1>Detect the hardware.<br><em>Forge</em> the stack.</h1>
+  <p class="lede">
+    <b>Vulcan</b> and <b>Anvil</b> are open-source CLIs that inspect what your
+    machine actually has — CPU, RAM, and disk, or GPU VRAM — and generate a
+    Docker Compose stack sized to it. Deterministic tier scoring, no LLM in
+    the decision path, no manual sizing guesswork.
+  </p>
+  <div class="method">
+    <span class="step">Detect real hardware</span>
+    <span class="arrow">&rarr;</span>
+    <span class="step">Recommend a tier</span>
+    <span class="arrow">&rarr;</span>
+    <span class="step">Generate the compose stack</span>
+    <span class="arrow">&rarr;</span>
+    <span class="step">Start it, or don't — your call</span>
+  </div>
+</div>
+
+<div class="floor wrap">
+  <div class="stations">
+
+    <!-- Vulcan -->
+    <section class="station vulcan">
+      <div class="station-head">
+        <div>
+          <p class="kicker">Media homelab forge</p>
+          <h2>Vulcan</h2>
+        </div>
+        <span class="station-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 6c5 6 7 10 7 14a7 7 0 1 1-14 0c0-1.8.6-3.4 2-5 .3 2 1.3 3 2.4 3-1-4 .6-8 2.6-12Z"/>
+          </svg>
+        </span>
+      </div>
+      <p class="desc">Deploy a self-hosted media stack — Jellyfin, the *arr suite, download clients, reverse proxy — sized to your hardware.</p>
+      <ul class="chips">
+        <li>Jellyfin</li><li>Radarr</li><li>Sonarr</li><li>Prowlarr</li>
+        <li>qBittorrent</li><li>Traefik</li><li>+ 13 more</li>
+      </ul>
+      <div class="tiers">
+        <div><b>Light &middot; Medium &middot; Heavy</b><span class="axis">scored on CPU cores, RAM, disk</span></div>
+      </div>
+      <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/vulcan.git
+<span class="c">$</span> cd vulcan &amp;&amp; <span class="p">sudo ./install</span></pre>
+      <a class="cta" href="https://github.com/Cyb3rRon1n/vulcan" target="_blank" rel="noopener">
+        View Vulcan on GitHub
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+    </section>
+
+    <!-- Anvil -->
+    <section class="station anvil">
+      <div class="station-head">
+        <div>
+          <p class="kicker">GPU-compute creativity forge</p>
+          <h2>Anvil</h2>
+        </div>
+        <span class="station-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 30h14l4-6h10v6H30l-3 5H8v-5Z"/>
+            <path d="M16 30v6h5v-6M32 22v-6h5l4 4"/>
+          </svg>
+        </span>
+      </div>
+      <p class="desc">Deploy a self-hosted AI stack — local LLMs and image generation — sized to your GPU's actual VRAM.</p>
+      <ul class="chips">
+        <li>Ollama</li><li>Open WebUI</li><li>ComfyUI</li><li>InvokeAI</li>
+      </ul>
+      <div class="tiers">
+        <div><b>Light &middot; Medium &middot; Heavy</b><span class="axis">scored on GPU VRAM</span></div>
+      </div>
+      <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/anvil.git
+<span class="c">$</span> cd anvil &amp;&amp; <span class="p">./install</span></pre>
+      <a class="cta" href="https://github.com/Cyb3rRon1n/anvil" target="_blank" rel="noopener">
+        View Anvil on GitHub
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+    </section>
+
+  </div>
+</div>
+
+<footer class="wrap">
+  <p>
+    Same method, different builds: both read your real hardware before they
+    write a single line of compose, and neither hands the sizing decision to
+    a model. Pick the one that matches what you're actually running.
+  </p>
+  <div class="links">
+    <a href="https://github.com/Cyb3rRon1n/vulcan" target="_blank" rel="noopener">github.com/Cyb3rRon1n/vulcan</a>
+    <a href="https://github.com/Cyb3rRon1n/anvil" target="_blank" rel="noopener">github.com/Cyb3rRon1n/anvil</a>
+  </div>
+</footer>
+
+</body>
+</html>
