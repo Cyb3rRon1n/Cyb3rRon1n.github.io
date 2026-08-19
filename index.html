@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vulcan &amp; Anvil</title>
-<meta name="description" content="Two open-source CLIs that detect your real hardware and generate a sized Docker Compose stack - Vulcan for media homelabs, Anvil for local AI.">
-<meta property="og:title" content="Vulcan &amp; Anvil">
-<meta property="og:description" content="Two open-source CLIs that detect your real hardware and generate a sized Docker Compose stack - Vulcan for media homelabs, Anvil for local AI.">
+<title>Forge Works</title>
+<meta name="description" content="Open-source tools by Cyb3rRon1n: Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops; Dojo builds a token-optimized opencode + Claude Code setup.">
+<meta property="og:title" content="Forge Works">
+<meta property="og:description" content="Open-source tools by Cyb3rRon1n: Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops; Dojo builds a token-optimized opencode + Claude Code setup.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
 
@@ -391,6 +391,62 @@
   .station a.cta svg { width: 1em; height: 1em; }
 
   /* ---------------------------------------------------------------
+     More-projects strip - lighter than the forge stations above, no
+     ember/temper theming (that pairing belongs to Vulcan & Anvil).
+  ----------------------------------------------------------------- */
+  .more {
+    padding: 0 0 3.5rem;
+  }
+  .more h2 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .more-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 860px) {
+    .more-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .more-card {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--muted);
+    background: var(--surface);
+    padding: 1.2rem 1.4rem;
+  }
+  .more-card h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+  }
+  .more-card p {
+    margin: 0 0 0.8rem;
+    color: var(--ink);
+    opacity: 0.86;
+    font-size: 0.94rem;
+  }
+  .more-card a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .more-card a:hover { color: var(--ink); }
+  .more-card a + a { margin-left: 1rem; }
+
+  /* ---------------------------------------------------------------
      Footer
   ----------------------------------------------------------------- */
   footer {
@@ -417,7 +473,7 @@
 <body>
 
 <div class="wrap topbar">
-  <span><span class="mark">FORGE&nbsp;WORKS</span> — self-hosted homelab deployers</span>
+  <span><span class="mark">FORGE&nbsp;WORKS</span> — open-source tools</span>
   <span>MIT &middot; open source</span>
 </div>
 
@@ -506,6 +562,26 @@
   </div>
 </div>
 
+<div class="more wrap">
+  <h2>Also from the forge</h2>
+  <div class="more-grid">
+
+    <div class="more-card">
+      <h3>Atlas</h3>
+      <p>AI-powered operations platform for self-hosted infrastructure — Proxmox, Docker, monitoring, all driven from one CLI.</p>
+      <a href="https://github.com/Cyb3rRon1n/atlas" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://cyb3rron1n.github.io/atlas/" target="_blank" rel="noopener">Docs</a>
+    </div>
+
+    <div class="more-card">
+      <h3>Dojo</h3>
+      <p>One command sets up opencode + Claude Code with four token-saving plugins wired in, on any machine you're working from.</p>
+      <a href="https://github.com/Cyb3rRon1n/dojo" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+  </div>
+</div>
+
 <footer class="wrap">
   <p>
     Same method, different builds: both read your real hardware before they
@@ -515,6 +591,8 @@
   <div class="links">
     <a href="https://github.com/Cyb3rRon1n/vulcan" target="_blank" rel="noopener">github.com/Cyb3rRon1n/vulcan</a>
     <a href="https://github.com/Cyb3rRon1n/anvil" target="_blank" rel="noopener">github.com/Cyb3rRon1n/anvil</a>
+    <a href="https://github.com/Cyb3rRon1n/atlas" target="_blank" rel="noopener">github.com/Cyb3rRon1n/atlas</a>
+    <a href="https://github.com/Cyb3rRon1n/dojo" target="_blank" rel="noopener">github.com/Cyb3rRon1n/dojo</a>
   </div>
 </footer>
 
