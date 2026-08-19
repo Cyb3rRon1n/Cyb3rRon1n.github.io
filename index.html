@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forge Works</title>
-<meta name="description" content="Open-source tools by Cyb3rRon1n: Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops; Dojo builds a token-optimized opencode + Claude Code setup.">
+<meta name="description" content="Open-source tools by Cyb3rRon1n: Dojo sets up opencode + Claude Code with token-saving plugins on any machine; Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops.">
 <meta property="og:title" content="Forge Works">
-<meta property="og:description" content="Open-source tools by Cyb3rRon1n: Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops; Dojo builds a token-optimized opencode + Claude Code setup.">
+<meta property="og:description" content="Open-source tools by Cyb3rRon1n: Dojo sets up opencode + Claude Code with token-saving plugins on any machine; Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
 
@@ -391,6 +391,76 @@
   .station a.cta svg { width: 1em; height: 1em; }
 
   /* ---------------------------------------------------------------
+     Start-here callout - sits above the Vulcan/Anvil hero, its own
+     accent (--focus, the same gold used for focus rings) so it never
+     competes with the ember/temper pairing below.
+  ----------------------------------------------------------------- */
+  .start {
+    padding: 1.6rem 0 0;
+  }
+  .start-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.4rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--focus);
+    padding: 1.3rem 1.6rem;
+  }
+  .start-text { flex: 1 1 26rem; }
+  .start-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--focus);
+    margin: 0 0 0.35rem;
+  }
+  .start-text h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+  }
+  .start-desc {
+    margin: 0;
+    color: var(--ink);
+    opacity: 0.86;
+    font-size: 0.95rem;
+    max-width: 52ch;
+  }
+  .start-cmd {
+    flex: 1 1 22rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .start-cmd pre.term { font-size: 0.78rem; white-space: pre-wrap; word-break: break-all; }
+  .start-cmd pre.term .p { color: var(--ember-bright); }
+  .start-cmd a.cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.95rem;
+    background: var(--focus);
+    color: var(--ember-ink);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .start-cmd a.cta:hover { background: var(--ember-strong); color: #fff; }
+  .start-cmd a.cta svg { width: 1em; height: 1em; }
+
+  /* ---------------------------------------------------------------
      More-projects strip - lighter than the forge stations above, no
      ember/temper theming (that pairing belongs to Vulcan & Anvil).
   ----------------------------------------------------------------- */
@@ -409,11 +479,8 @@
   }
   .more-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
     gap: 1rem;
-  }
-  @media (min-width: 860px) {
-    .more-grid { grid-template-columns: 1fr 1fr; }
   }
   .more-card {
     border: 1px solid var(--line);
@@ -475,6 +542,28 @@
 <div class="wrap topbar">
   <span><span class="mark">FORGE&nbsp;WORKS</span> — open-source tools</span>
   <span>MIT &middot; open source</span>
+</div>
+
+<div class="start wrap">
+  <div class="start-inner">
+    <div class="start-text">
+      <p class="start-kicker">New machine? Start here</p>
+      <h2>Dojo warms up opencode &amp; Claude Code first.</h2>
+      <p class="start-desc">
+        Run this before anything else on a fresh machine — no directory to
+        create or navigate to first, it's all absolute paths. Paste it,
+        then follow the prompt to log in to GitHub (SSH key or a browser
+        code) and it clones your projects too.
+      </p>
+    </div>
+    <div class="start-cmd">
+      <pre class="term"><span class="c">$</span> bash &lt;(curl -fsSL <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.sh</span>)</pre>
+      <a class="cta" href="https://github.com/Cyb3rRon1n/dojo" target="_blank" rel="noopener">
+        View Dojo on GitHub
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+    </div>
+  </div>
 </div>
 
 <div class="hero wrap">
@@ -571,12 +660,6 @@
       <p>AI-powered operations platform for self-hosted infrastructure — Proxmox, Docker, monitoring, all driven from one CLI.</p>
       <a href="https://github.com/Cyb3rRon1n/atlas" target="_blank" rel="noopener">GitHub</a>
       <a href="https://cyb3rron1n.github.io/atlas/" target="_blank" rel="noopener">Docs</a>
-    </div>
-
-    <div class="more-card">
-      <h3>Dojo</h3>
-      <p>One command sets up opencode + Claude Code with four token-saving plugins wired in, on any machine you're working from.</p>
-      <a href="https://github.com/Cyb3rRon1n/dojo" target="_blank" rel="noopener">GitHub</a>
     </div>
 
   </div>
