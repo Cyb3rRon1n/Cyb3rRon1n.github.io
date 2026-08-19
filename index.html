@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forge Works</title>
-<meta name="description" content="Open-source tools by Cyb3rRon1n: Dojo sets up opencode, Claude Code, GitHub Copilot CLI, Codex CLI, and Aider with token-saving optimizations on any machine; Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops; Oracle is an AI Dungeon Master for real-time tabletop sessions.">
-<meta property="og:title" content="Forge Works">
-<meta property="og:description" content="Open-source tools by Cyb3rRon1n: Dojo sets up opencode, Claude Code, GitHub Copilot CLI, Codex CLI, and Aider with token-saving optimizations on any machine; Vulcan and Anvil detect your real hardware and generate a sized Docker Compose stack; Atlas runs self-hosted ops; Oracle is an AI Dungeon Master for real-time tabletop sessions.">
+<title>Foundry</title>
+<meta name="description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master on real computed game mechanics, and Dojo sets up your AI coding tools on a fresh machine.">
+<meta property="og:title" content="Foundry">
+<meta property="og:description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master on real computed game mechanics, and Dojo sets up your AI coding tools on a fresh machine.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
 
@@ -16,10 +16,13 @@
 
 <style>
   /* ---------------------------------------------------------------
-     Tokens - dark-first (a forge is a dark room lit by two heat
-     sources). Bare :root holds the dark palette; the light palette
-     lives under prefers-color-scheme:light and [data-theme="light"],
-     the swapped mirror of the usual light-first pattern.
+     Tokens — dark-first (a foundry floor is a dark room lit by its
+     own work). Bare :root holds the dark palette; light lives under
+     prefers-color-scheme:light and [data-theme="light"], the
+     swapped mirror of the usual light-first pattern. Every project
+     accent below is pulled straight from that project's own brand
+     kit (docs/images/logo.svg in each repo) so this page and each
+     repo's README read as the same family, not a re-skin.
   ----------------------------------------------------------------- */
   :root {
     --ground: #17130f;
@@ -29,24 +32,38 @@
     --muted: #b3a28d;
     --line: #3c3226;
 
-    --ember: #ff5f1f;
+    --ember: #ff5f1f;        /* Vulcan */
     --ember-strong: #ffa15c;
-    --ember-soft: rgba(255, 95, 31, 0.2);
+    --ember-soft: rgba(255, 95, 31, 0.16);
     --ember-ink: #260f04;
 
-    --temper: #2f97f0;
+    --temper: #2f97f0;       /* Anvil */
     --temper-strong: #7cc2fa;
-    --temper-soft: rgba(47, 151, 240, 0.2);
+    --temper-soft: rgba(47, 151, 240, 0.16);
     --temper-ink: #05182b;
 
+    --atlas: #5cb3c4;        /* Atlas */
+    --atlas-strong: #8fd0dd;
+    --atlas-soft: rgba(92, 179, 196, 0.16);
+    --atlas-gold: #d9ab5c;
+    --atlas-ink: #04222a;
+
+    --oracle: #a685f2;       /* Oracle */
+    --oracle-strong: #c7b2f8;
+    --oracle-soft: rgba(166, 133, 242, 0.18);
+    --oracle-gold: #ecc35c;
+    --oracle-ink: #1c1030;
+
+    --seal: #c23b28;         /* Dojo's hanko stamp — used only in the start band */
     --focus: #ffd166;
 
-    /* Fixed, theme-independent - the terminal block's own background
-       is always dark (a terminal is a terminal), so its command-
-       highlight color must not swap to the light theme's darker
-       --ember/--temper-strong shades, which would go dark-on-dark. */
+    /* Fixed, theme-independent — a terminal block's own background is
+       always dark, so its command highlight must not swap to the
+       light theme's darker accent shades, which would go dark-on-dark. */
     --ember-bright: #ff8a42;
     --temper-bright: #5cb0f5;
+    --atlas-bright: #7ecbda;
+    --oracle-bright: #bda3f6;
 
     --font-display: "Big Shoulders", "Arial Narrow", sans-serif;
     --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
@@ -64,13 +81,25 @@
 
       --ember: #d63d0a;
       --ember-strong: #a4300a;
-      --ember-soft: rgba(214, 61, 10, 0.15);
+      --ember-soft: rgba(214, 61, 10, 0.12);
       --ember-ink: #fff5ec;
 
       --temper: #1466c2;
       --temper-strong: #124f96;
-      --temper-soft: rgba(20, 102, 194, 0.15);
+      --temper-soft: rgba(20, 102, 194, 0.12);
       --temper-ink: #eef5fc;
+
+      --atlas: #106571;
+      --atlas-strong: #0a4f59;
+      --atlas-soft: rgba(16, 101, 113, 0.12);
+      --atlas-gold: #8a6511;
+      --atlas-ink: #eefaf8;
+
+      --oracle: #6a3fc4;
+      --oracle-strong: #522f99;
+      --oracle-soft: rgba(106, 63, 196, 0.12);
+      --oracle-gold: #8a6a11;
+      --oracle-ink: #f6f1fe;
     }
   }
 
@@ -84,13 +113,25 @@
 
     --ember: #d63d0a;
     --ember-strong: #a4300a;
-    --ember-soft: rgba(214, 61, 10, 0.15);
+    --ember-soft: rgba(214, 61, 10, 0.12);
     --ember-ink: #fff5ec;
 
     --temper: #1466c2;
     --temper-strong: #124f96;
-    --temper-soft: rgba(20, 102, 194, 0.15);
+    --temper-soft: rgba(20, 102, 194, 0.12);
     --temper-ink: #eef5fc;
+
+    --atlas: #106571;
+    --atlas-strong: #0a4f59;
+    --atlas-soft: rgba(16, 101, 113, 0.12);
+    --atlas-gold: #8a6511;
+    --atlas-ink: #eefaf8;
+
+    --oracle: #6a3fc4;
+    --oracle-strong: #522f99;
+    --oracle-soft: rgba(106, 63, 196, 0.12);
+    --oracle-gold: #8a6a11;
+    --oracle-ink: #f6f1fe;
   }
 
   * { box-sizing: border-box; }
@@ -109,18 +150,19 @@
   :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
   .wrap {
-    max-width: 1120px;
+    max-width: 1160px;
     margin: 0 auto;
     padding: 0 clamp(1.25rem, 4vw, 3rem);
   }
 
   /* ---------------------------------------------------------------
-     Top bar
+     Top bar — the maker's mark, not a nav
   ----------------------------------------------------------------- */
   .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     padding: 1.6rem 0 0;
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -128,276 +170,17 @@
     text-transform: uppercase;
     color: var(--muted);
   }
-
+  .topbar .maker { display: flex; align-items: center; gap: 0.6rem; }
+  .topbar .maker svg { width: 1.1rem; height: 1.1rem; color: var(--ink); flex: none; }
   .topbar .mark { color: var(--ink); font-weight: 600; }
 
   /* ---------------------------------------------------------------
-     Hero
+     Start-here band — Dojo. A real functional distinction (this is
+     the onboarding step, not one of the four tools), so it keeps its
+     own visual register: ink + the seal red from dojo's own mark,
+     never the project accent hues below.
   ----------------------------------------------------------------- */
-  .hero {
-    position: relative;
-    padding: 4.5rem 0 3.5rem;
-    overflow: hidden;
-  }
-
-  .hero-glow {
-    position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 26rem;
-    background:
-      radial-gradient(38rem 16rem at 22% 30%, var(--ember-soft), transparent 65%),
-      radial-gradient(30rem 14rem at 78% 20%, var(--temper-soft), transparent 65%);
-    pointer-events: none;
-    opacity: 0.9;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-glow { animation: breathe 7s ease-in-out infinite alternate; }
-  }
-  @keyframes breathe {
-    from { opacity: 0.65; transform: translateY(0); }
-    to   { opacity: 1;    transform: translateY(-6px); }
-  }
-
-  .eyebrow {
-    position: relative;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 1.1rem;
-  }
-
-  h1 {
-    position: relative;
-    font-family: var(--font-display);
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: clamp(2.6rem, 6.4vw, 5.1rem);
-    line-height: 0.96;
-    letter-spacing: -0.01em;
-    margin: 0 0 1.3rem;
-    text-wrap: balance;
-  }
-
-  h1 em {
-    font-style: normal;
-    background: linear-gradient(95deg, var(--ember) 0%, var(--ember) 48%, var(--temper) 52%, var(--temper) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .hero p.lede {
-    position: relative;
-    max-width: 62ch;
-    font-size: 1.14rem;
-    color: var(--ink);
-    opacity: 0.86;
-    margin: 0;
-  }
-
-  .hero p.lede b { color: var(--ink); opacity: 1; font-weight: 600; }
-
-  /* ---------------------------------------------------------------
-     Method strip - a real sequence (detect happens before recommend
-     happens before generate), so the arrowed order carries real
-     information, not decoration.
-  ----------------------------------------------------------------- */
-  .method {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.6rem 0.9rem;
-    margin: 2.4rem 0 0;
-    padding: 1rem 1.2rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  .method .step { color: var(--ink); }
-  .method .arrow { color: var(--line); font-size: 1rem; }
-
-  /* ---------------------------------------------------------------
-     Forge floor - the two stations
-  ----------------------------------------------------------------- */
-  .floor {
-    padding: 1rem 0 4rem;
-  }
-
-  .stations {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-  }
-  @media (min-width: 860px) {
-    .stations { grid-template-columns: 1fr 1fr; }
-  }
-
-  .station {
-    --accent: var(--ember);
-    --accent-strong: var(--ember-strong);
-    --accent-soft: var(--ember-soft);
-    --accent-ink: var(--ember-ink);
-
-    position: relative;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    clip-path: polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
-    padding: 2rem 1.9rem 1.9rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.15rem;
-  }
-
-  .station.anvil {
-    --accent: var(--temper);
-    --accent-strong: var(--temper-strong);
-    --accent-soft: var(--temper-soft);
-    --accent-ink: var(--temper-ink);
-  }
-
-  .station::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, var(--accent-soft), transparent 40%);
-    pointer-events: none;
-  }
-
-  .station-head {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .station-icon {
-    flex: none;
-    width: 2.6rem;
-    height: 2.6rem;
-    color: var(--accent);
-  }
-  .station-icon svg { width: 100%; height: 100%; }
-
-  .station h2 {
-    position: relative;
-    font-family: var(--font-display);
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: clamp(2rem, 4.4vw, 2.6rem);
-    letter-spacing: 0.01em;
-    line-height: 1;
-    margin: 0.3rem 0 0.2rem;
-    color: var(--ink);
-  }
-
-  .station .kicker {
-    position: relative;
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 0.15rem;
-  }
-
-  .station .desc {
-    position: relative;
-    margin: 0;
-    color: var(--ink);
-    opacity: 0.88;
-    font-size: 1rem;
-    max-width: 42ch;
-  }
-
-  .chips {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .chips li {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    padding: 0.3rem 0.6rem;
-    border: 1px solid var(--line);
-    color: var(--muted);
-    background: var(--surface-2);
-  }
-
-  .tiers {
-    position: relative;
-    display: flex;
-    gap: 1.4rem;
-    font-family: var(--font-mono);
-    font-variant-numeric: tabular-nums;
-    font-size: 0.8rem;
-    color: var(--muted);
-    padding-top: 0.2rem;
-    border-top: 1px solid var(--line);
-  }
-  .tiers b { color: var(--ink); display: block; font-size: 0.95rem; font-weight: 600; }
-  .tiers span.axis { display: block; margin-top: 0.15rem; }
-
-  pre.term {
-    position: relative;
-    margin: 0;
-    padding: 0.95rem 1.05rem;
-    background: #0f0c09;
-    border: 1px solid var(--line);
-    color: #d9cfc0;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    line-height: 1.65;
-    overflow-x: auto;
-  }
-  pre.term .p { color: var(--ember-bright); }
-  .station.anvil pre.term .p { color: var(--temper-bright); }
-  pre.term .c { opacity: 0.6; }
-
-  .station a.cta {
-    position: relative;
-    align-self: flex-start;
-    margin-top: 0.2rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1rem;
-    background: var(--accent);
-    color: var(--accent-ink);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    box-shadow: 0 0 0 0 var(--accent-soft);
-  }
-  .station a.cta:hover {
-    background: var(--accent-strong);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 22px -4px var(--accent-soft);
-  }
-  .station a.cta svg { width: 1em; height: 1em; }
-
-  /* ---------------------------------------------------------------
-     Start-here callout - sits above the Vulcan/Anvil hero, its own
-     accent (--focus, the same gold used for focus rings) so it never
-     competes with the ember/temper pairing below.
-  ----------------------------------------------------------------- */
-  .start {
-    padding: 1.6rem 0 0;
-  }
+  .start { padding: 1.8rem 0 0; }
   .start-inner {
     display: flex;
     flex-wrap: wrap;
@@ -405,16 +188,18 @@
     gap: 1.4rem 2rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--focus);
+    border-left: 3px solid var(--seal);
     padding: 1.3rem 1.6rem;
   }
+  .start-mark { flex: none; width: 46px; height: 46px; color: var(--ink); }
+  .start-mark .seal { fill: var(--seal); }
   .start-text { flex: 1 1 26rem; }
   .start-kicker {
     font-family: var(--font-mono);
     font-size: 0.76rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--focus);
+    color: var(--seal);
     margin: 0 0 0.35rem;
   }
   .start-text h2 {
@@ -427,29 +212,18 @@
     margin: 0 0 0.5rem;
     color: var(--ink);
   }
-  .start-desc {
-    margin: 0;
-    color: var(--ink);
-    opacity: 0.86;
-    font-size: 0.95rem;
-    max-width: 52ch;
-  }
-  .start-cmd {
-    flex: 1 1 22rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
+  .start-desc { margin: 0; color: var(--ink); opacity: 0.86; font-size: 0.95rem; max-width: 52ch; }
+  .start-cmd { flex: 1 1 22rem; display: flex; flex-direction: column; gap: 0.6rem; }
   .start-cmd pre.term { font-size: 0.78rem; white-space: pre-wrap; word-break: break-all; }
-  .start-cmd pre.term .p { color: var(--ember-bright); }
+  .start-cmd pre.term .p { color: #e8776a; }
   .start-cmd a.cta {
     align-self: flex-start;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.55rem 0.95rem;
-    background: var(--focus);
-    color: var(--ember-ink);
+    background: var(--seal);
+    color: #fff5f0;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 600;
@@ -457,82 +231,142 @@
     text-decoration: none;
     text-transform: uppercase;
   }
-  .start-cmd a.cta:hover { background: var(--ember-strong); color: #fff; }
+  .start-cmd a.cta:hover { background: #9c2e1f; }
   .start-cmd a.cta svg { width: 1em; height: 1em; }
 
   /* ---------------------------------------------------------------
-     More-projects strip - lighter than the forge stations above, no
-     ember/temper theming (that pairing belongs to Vulcan & Anvil).
+     Hero — the thesis every card below backs up
   ----------------------------------------------------------------- */
-  .more {
-    padding: 0 0 3.5rem;
+  .hero { position: relative; padding: 4.2rem 0 2.6rem; overflow: hidden; }
+  .hero-glow {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 24rem;
+    background:
+      radial-gradient(34rem 15rem at 18% 30%, var(--ember-soft), transparent 65%),
+      radial-gradient(28rem 13rem at 46% 15%, var(--temper-soft), transparent 65%),
+      radial-gradient(26rem 13rem at 72% 30%, var(--atlas-soft), transparent 65%),
+      radial-gradient(24rem 12rem at 94% 12%, var(--oracle-soft), transparent 65%);
+    pointer-events: none;
+    opacity: 0.9;
   }
-  .more h2 {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 1rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--line);
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-glow { animation: breathe 8s ease-in-out infinite alternate; }
   }
-  .more-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
-    gap: 1rem;
-  }
-  .more-card {
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--muted);
-    background: var(--surface);
-    padding: 1.2rem 1.4rem;
-  }
-  .more-card h3 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 1.3rem;
-    letter-spacing: 0.01em;
-    margin: 0 0 0.4rem;
-    color: var(--ink);
-  }
-  .more-card p {
-    margin: 0 0 0.8rem;
-    color: var(--ink);
-    opacity: 0.86;
-    font-size: 0.94rem;
-  }
-  .more-card a {
+  @keyframes breathe { from { opacity: 0.6; } to { opacity: 1; } }
+
+  .eyebrow {
+    position: relative;
     font-family: var(--font-mono);
     font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: var(--muted);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    margin: 0 0 1.1rem;
   }
-  .more-card a:hover { color: var(--ink); }
-  .more-card a + a { margin-left: 1rem; }
+  h1 {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(2.5rem, 6vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.3rem;
+    text-wrap: balance;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(95deg, var(--ember) 0%, var(--temper) 34%, var(--atlas) 66%, var(--oracle) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p.lede { position: relative; max-width: 64ch; font-size: 1.1rem; color: var(--ink); opacity: 0.86; margin: 0; }
+  .hero p.lede b { color: var(--ink); opacity: 1; font-weight: 600; }
+
+  /* value strip — one line per card below, previewing the real claim */
+  .values { position: relative; display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; margin: 2.2rem 0 0; padding: 1rem 1.2rem; background: var(--surface); border: 1px solid var(--line); }
+  .values li { display: flex; align-items: baseline; gap: 0.5rem; list-style: none; font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); }
+  .values li::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--dot); flex: none; }
+  .values b { color: var(--ink); font-weight: 600; }
+
+  /* ---------------------------------------------------------------
+     Gallery — four equal instruments, one grid
+  ----------------------------------------------------------------- */
+  .floor { padding: 2.4rem 0 4rem; }
+  .gallery { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
+  @media (min-width: 860px) { .gallery { grid-template-columns: 1fr 1fr; } }
+
+  .card {
+    --accent: var(--ember);
+    --accent-strong: var(--ember-strong);
+    --accent-soft: var(--ember-soft);
+    --accent-ink: var(--ember-ink);
+
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    clip-path: polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+    padding: 1.9rem 1.8rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.05rem;
+  }
+  .card.anvil  { --accent: var(--temper); --accent-strong: var(--temper-strong); --accent-soft: var(--temper-soft); --accent-ink: var(--temper-ink); }
+  .card.atlas  { --accent: var(--atlas);  --accent-strong: var(--atlas-strong);  --accent-soft: var(--atlas-soft);  --accent-ink: var(--atlas-ink); }
+  .card.oracle { --accent: var(--oracle); --accent-strong: var(--oracle-strong); --accent-soft: var(--oracle-soft); --accent-ink: var(--oracle-ink); }
+
+  .card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--accent-soft), transparent 42%); pointer-events: none; }
+
+  .card-head { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+  .card-icon { flex: none; width: 2.4rem; height: 2.4rem; color: var(--accent); }
+  .card-icon svg { width: 100%; height: 100%; }
+  .card h2 { position: relative; font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.8rem, 3.6vw, 2.3rem); letter-spacing: 0.01em; line-height: 1; margin: 0.25rem 0 0.15rem; color: var(--ink); }
+  .card .kicker { position: relative; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.1rem; }
+  .card .desc { position: relative; margin: 0; color: var(--ink); opacity: 0.88; font-size: 0.96rem; max-width: 44ch; }
+
+  .chips { position: relative; display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+  .chips li { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.28rem 0.55rem; border: 1px solid var(--line); color: var(--muted); background: var(--surface-2); }
+
+  pre.term { position: relative; margin: 0; padding: 0.9rem 1rem; background: #0f0c09; border: 1px solid var(--line); color: #d9cfc0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6; overflow-x: auto; }
+  pre.term .p { color: var(--ember-bright); }
+  .card.anvil  pre.term .p { color: var(--temper-bright); }
+  .card.atlas  pre.term .p { color: var(--atlas-bright); }
+  .card.oracle pre.term .p { color: var(--oracle-bright); }
+  pre.term .c { opacity: 0.6; }
+  .card .note { position: relative; margin: -0.3rem 0 0; font-size: 0.8rem; color: var(--muted); }
+
+  .card a.cta {
+    position: relative;
+    align-self: flex-start;
+    margin-top: 0.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.58rem 0.95rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .card a.cta:hover { background: var(--accent-strong); transform: translateY(-1px); box-shadow: 0 6px 22px -4px var(--accent-soft); }
+  .card a.cta svg { width: 1em; height: 1em; }
 
   /* ---------------------------------------------------------------
      Footer
   ----------------------------------------------------------------- */
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 1.8rem 0 2.6rem;
-  }
-  footer p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.88rem;
-    max-width: 68ch;
-  }
-  footer .links {
-    margin-top: 0.7rem;
-    display: flex;
-    gap: 1.2rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-  }
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 2.6rem; }
+  footer .foot-mark { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.9rem; }
+  footer .foot-mark svg { width: 1.3rem; height: 1.3rem; color: var(--ink); flex: none; }
+  footer .foot-mark span { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; font-size: 1rem; color: var(--ink); }
+  footer p { margin: 0; color: var(--muted); font-size: 0.88rem; max-width: 68ch; }
+  footer .links { margin-top: 0.9rem; display: flex; flex-wrap: wrap; gap: 1.1rem 1.4rem; font-family: var(--font-mono); font-size: 0.8rem; }
   footer .links a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
   footer .links a:hover { color: var(--ink); }
 </style>
@@ -540,12 +374,19 @@
 <body>
 
 <div class="wrap topbar">
-  <span><span class="mark">FORGE&nbsp;WORKS</span> — open-source tools</span>
+  <span class="maker">
+    <svg viewBox="0 0 200 200" fill="currentColor" aria-hidden="true"><path d="M 32.45,75.41 L 34.89,69.96 L 37.74,64.73 L 41.01,59.76 L 44.68,55.10 L 48.72,50.77 L 53.10,46.81 L 57.79,43.24 L 62.75,40.10 L 67.95,37.39 L 73.34,35.15 L 78.89,33.37 L 84.55,32.09 L 90.29,31.29 L 96.04,30.98 L 101.78,31.16 L 107.47,31.82 L 113.05,32.95 L 118.50,34.55 L 123.77,36.59 L 128.82,39.06 L 133.64,41.92 L 138.17,45.16 L 142.41,48.75 L 146.31,52.67 L 149.86,56.87 L 153.05,61.33 L 155.84,66.01 L 158.24,70.89 L 160.22,75.92 L 161.78,81.07 L 162.92,86.32 L 163.63,91.62 L 163.92,96.95 L 163.77,102.26 L 163.21,107.53 L 162.23,112.73 L 160.85,117.83 L 159.07,122.79 L 156.91,127.58 L 154.37,132.19 L 151.48,136.57 L 148.25,140.72 L 144.71,144.59 L 140.87,148.17 L 136.75,151.43 L 132.38,154.35 L 127.78,156.92 L 122.99,159.11 L 118.02,160.91 L 112.92,162.31 L 107.72,163.28 L 102.44,163.83 L 97.12,163.94 L 91.80,163.61 L 86.52,162.84 L 81.31,161.63 L 76.20,159.98 L 71.25,157.91 L 66.47,155.42 L 61.92,152.53 L 57.62,149.26 L 53.61,145.63 L 49.92,141.67 L 46.59,137.40 L 49.04,135.68 L 52.37,139.63 L 56.02,143.27 L 59.94,146.56 L 64.12,149.50 L 68.51,152.05 L 73.08,154.21 L 77.79,155.97 L 82.61,157.32 L 87.50,158.25 L 92.43,158.77 L 97.35,158.87 L 102.24,158.57 L 107.06,157.86 L 111.78,156.77 L 116.37,155.31 L 120.80,153.49 L 125.05,151.32 L 129.09,148.83 L 132.90,146.04 L 136.45,142.97 L 139.74,139.63 L 142.74,136.06 L 145.44,132.28 L 147.82,128.31 L 149.88,124.18 L 151.60,119.90 L 152.97,115.52 L 153.99,111.05 L 154.65,106.51 L 154.96,101.95 L 154.90,97.38 L 154.48,92.83 L 153.70,88.33 L 152.56,83.90 L 151.07,79.58 L 149.23,75.39 L 147.06,71.35 L 144.57,67.51 L 141.77,63.87 L 138.68,60.47 L 135.31,57.33 L 131.69,54.48 L 127.84,51.93 L 123.78,49.71 L 119.55,47.84 L 115.17,46.33 L 110.67,45.19 L 106.09,44.43 L 101.45,44.07 L 96.80,44.11 L 92.16,44.54 L 87.58,45.37 L 83.08,46.59 L 78.71,48.20 L 74.49,50.17 L 70.47,52.50 L 66.66,55.17 L 63.10,58.16 L 59.82,61.43 L 56.85,64.98 L 54.20,68.76 L 51.89,72.75 L 49.96,76.91 L 48.43,81.23 Z"/><circle cx="152" cy="120" r="6" fill="#c23b28"/></svg>
+    <span class="mark">Cyb3rRon1n</span> — foundry
+  </span>
   <span>MIT &middot; open source</span>
 </div>
 
 <div class="start wrap">
   <div class="start-inner">
+    <svg class="start-mark" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+      <path d="M 32.45,75.41 L 34.89,69.96 L 37.74,64.73 L 41.01,59.76 L 44.68,55.10 L 48.72,50.77 L 53.10,46.81 L 57.79,43.24 L 62.75,40.10 L 67.95,37.39 L 73.34,35.15 L 78.89,33.37 L 84.55,32.09 L 90.29,31.29 L 96.04,30.98 L 101.78,31.16 L 107.47,31.82 L 113.05,32.95 L 118.50,34.55 L 123.77,36.59 L 128.82,39.06 L 133.64,41.92 L 138.17,45.16 L 142.41,48.75 L 146.31,52.67 L 149.86,56.87 L 153.05,61.33 L 155.84,66.01 L 158.24,70.89 L 160.22,75.92 L 161.78,81.07 L 162.92,86.32 L 163.63,91.62 L 163.92,96.95 L 163.77,102.26 L 163.21,107.53 L 162.23,112.73 L 160.85,117.83 L 159.07,122.79 L 156.91,127.58 L 154.37,132.19 L 151.48,136.57 L 148.25,140.72 L 144.71,144.59 L 140.87,148.17 L 136.75,151.43 L 132.38,154.35 L 127.78,156.92 L 122.99,159.11 L 118.02,160.91 L 112.92,162.31 L 107.72,163.28 L 102.44,163.83 L 97.12,163.94 L 91.80,163.61 L 86.52,162.84 L 81.31,161.63 L 76.20,159.98 L 71.25,157.91 L 66.47,155.42 L 61.92,152.53 L 57.62,149.26 L 53.61,145.63 L 49.92,141.67 L 46.59,137.40 L 49.04,135.68 L 52.37,139.63 L 56.02,143.27 L 59.94,146.56 L 64.12,149.50 L 68.51,152.05 L 73.08,154.21 L 77.79,155.97 L 82.61,157.32 L 87.50,158.25 L 92.43,158.77 L 97.35,158.87 L 102.24,158.57 L 107.06,157.86 L 111.78,156.77 L 116.37,155.31 L 120.80,153.49 L 125.05,151.32 L 129.09,148.83 L 132.90,146.04 L 136.45,142.97 L 139.74,139.63 L 142.74,136.06 L 145.44,132.28 L 147.82,128.31 L 149.88,124.18 L 151.60,119.90 L 152.97,115.52 L 153.99,111.05 L 154.65,106.51 L 154.96,101.95 L 154.90,97.38 L 154.48,92.83 L 153.70,88.33 L 152.56,83.90 L 151.07,79.58 L 149.23,75.39 L 147.06,71.35 L 144.57,67.51 L 141.77,63.87 L 138.68,60.47 L 135.31,57.33 L 131.69,54.48 L 127.84,51.93 L 123.78,49.71 L 119.55,47.84 L 115.17,46.33 L 110.67,45.19 L 106.09,44.43 L 101.45,44.07 L 96.80,44.11 L 92.16,44.54 L 87.58,45.37 L 83.08,46.59 L 78.71,48.20 L 74.49,50.17 L 70.47,52.50 L 66.66,55.17 L 63.10,58.16 L 59.82,61.43 L 56.85,64.98 L 54.20,68.76 L 51.89,72.75 L 49.96,76.91 L 48.43,81.23 Z"/>
+      <circle class="seal" cx="152" cy="120" r="6"/>
+    </svg>
     <div class="start-text">
       <p class="start-kicker">New machine? Start here</p>
       <h2>Dojo warms up your AI coding tools first.</h2>
@@ -570,65 +411,59 @@
 
 <div class="hero wrap">
   <div class="hero-glow" aria-hidden="true"></div>
-  <p class="eyebrow">Two tools, one detection-first method</p>
-  <h1>Detect the hardware.<br><em>Forge</em> the stack.</h1>
+  <p class="eyebrow">One maker, four tools, nothing narrated that isn't real</p>
+  <h1>Built on what's <em>real</em>,<br>not assumed.</h1>
   <p class="lede">
-    <b>Vulcan</b> and <b>Anvil</b> are open-source CLIs that inspect what your
-    machine actually has — CPU, RAM, and disk, or GPU VRAM — and generate a
-    Docker Compose stack sized to it. Deterministic tier scoring, no LLM in
-    the decision path, no manual sizing guesswork.
+    Every tool here inspects the real system before it acts on it, or computes
+    the real number instead of letting a model guess one — <b>real GPU
+    VRAM</b>, <b>real infrastructure state</b>, <b>real game math</b>. No LLM
+    sits in a sizing or scoring path anywhere below.
   </p>
-  <div class="method">
-    <span class="step">Detect real hardware</span>
-    <span class="arrow">&rarr;</span>
-    <span class="step">Recommend a tier</span>
-    <span class="arrow">&rarr;</span>
-    <span class="step">Generate the compose stack</span>
-    <span class="arrow">&rarr;</span>
-    <span class="step">Start it, or don't — your call</span>
-  </div>
+  <ul class="values">
+    <li style="--dot:var(--ember)"><b>Vulcan</b>&nbsp;sized to real disk/RAM/CPU</li>
+    <li style="--dot:var(--temper)"><b>Anvil</b>&nbsp;sized to real GPU VRAM</li>
+    <li style="--dot:var(--atlas)"><b>Atlas</b>&nbsp;verified on real infra, not mocks</li>
+    <li style="--dot:var(--oracle)"><b>Oracle</b>&nbsp;engine-computed, not model-guessed</li>
+  </ul>
 </div>
 
 <div class="floor wrap">
-  <div class="stations">
+  <div class="gallery">
 
     <!-- Vulcan -->
-    <section class="station vulcan">
-      <div class="station-head">
+    <section class="card vulcan">
+      <div class="card-head">
         <div>
           <p class="kicker">Media homelab forge</p>
           <h2>Vulcan</h2>
         </div>
-        <span class="station-icon" aria-hidden="true">
+        <span class="card-icon" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M24 6c5 6 7 10 7 14a7 7 0 1 1-14 0c0-1.8.6-3.4 2-5 .3 2 1.3 3 2.4 3-1-4 .6-8 2.6-12Z"/>
           </svg>
         </span>
       </div>
-      <p class="desc">Deploy a self-hosted media stack — Jellyfin, the *arr suite, download clients, reverse proxy — sized to your hardware.</p>
+      <p class="desc">Deploy a self-hosted media stack — Jellyfin, the *arr suite, download clients, reverse proxy — sized to your real CPU, RAM, and disk.</p>
       <ul class="chips">
         <li>Jellyfin</li><li>Radarr</li><li>Sonarr</li><li>Prowlarr</li>
-        <li>qBittorrent</li><li>Traefik</li><li>+ 13 more</li>
+        <li>qBittorrent</li><li>Traefik</li><li>+13 more</li>
       </ul>
-      <div class="tiers">
-        <div><b>Light &middot; Medium &middot; Heavy</b><span class="axis">scored on CPU cores, RAM, disk</span></div>
-      </div>
       <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/vulcan.git
 <span class="c">$</span> cd vulcan &amp;&amp; <span class="p">sudo ./install</span></pre>
       <a class="cta" href="https://github.com/Cyb3rRon1n/vulcan" target="_blank" rel="noopener">
-        View Vulcan on GitHub
+        View on GitHub
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
       </a>
     </section>
 
     <!-- Anvil -->
-    <section class="station anvil">
-      <div class="station-head">
+    <section class="card anvil">
+      <div class="card-head">
         <div>
           <p class="kicker">GPU-compute creativity forge</p>
           <h2>Anvil</h2>
         </div>
-        <span class="station-icon" aria-hidden="true">
+        <span class="card-icon" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8 30h14l4-6h10v6H30l-3 5H8v-5Z"/>
             <path d="M16 30v6h5v-6M32 22v-6h5l4 4"/>
@@ -639,13 +474,73 @@
       <ul class="chips">
         <li>Ollama</li><li>Open WebUI</li><li>ComfyUI</li><li>InvokeAI</li><li>+ RAG/voice/n8n</li>
       </ul>
-      <div class="tiers">
-        <div><b>Light &middot; Medium &middot; Heavy</b><span class="axis">scored on GPU VRAM</span></div>
-      </div>
       <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/anvil.git
 <span class="c">$</span> cd anvil &amp;&amp; <span class="p">sudo ./install</span></pre>
       <a class="cta" href="https://github.com/Cyb3rRon1n/anvil" target="_blank" rel="noopener">
-        View Anvil on GitHub
+        View on GitHub
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+    </section>
+
+    <!-- Atlas -->
+    <section class="card atlas">
+      <div class="card-head">
+        <div>
+          <p class="kicker">Self-hosted ops platform</p>
+          <h2>Atlas</h2>
+        </div>
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="26" stroke="currentColor" stroke-width="2"/>
+            <ellipse cx="32" cy="32" rx="26" ry="10" stroke="currentColor" stroke-width="1.3" opacity="0.55"/>
+            <ellipse cx="32" cy="32" rx="12" ry="26" stroke="currentColor" stroke-width="1.3" opacity="0.55"/>
+            <g stroke="var(--atlas-gold)" stroke-width="1.6">
+              <line x1="14" y1="24" x2="32" y2="14"/><line x1="32" y1="14" x2="48" y2="22"/>
+              <line x1="14" y1="24" x2="22" y2="42"/><line x1="48" y1="22" x2="42" y2="46"/><line x1="22" y1="42" x2="42" y2="46"/>
+            </g>
+            <g fill="var(--atlas-gold)">
+              <circle cx="14" cy="24" r="2.8"/><circle cx="32" cy="14" r="2.8"/><circle cx="48" cy="22" r="2.8"/>
+              <circle cx="22" cy="42" r="2.8"/><circle cx="42" cy="46" r="2.8"/>
+            </g>
+          </svg>
+        </span>
+      </div>
+      <p class="desc">Know what's running on your infrastructure and what changed — Proxmox and Docker discovery, AI-assisted analysis, approval-gated actions, verified against real infrastructure, never just mocks.</p>
+      <ul class="chips">
+        <li>Proxmox</li><li>Docker</li><li>Discovery</li><li>Claude / Ollama analysis</li><li>Approval-gated</li>
+      </ul>
+      <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/atlas.git
+<span class="c">$</span> cd atlas &amp;&amp; pip install -e . &amp;&amp; <span class="p">atlas version</span></pre>
+      <a class="cta" href="https://github.com/Cyb3rRon1n/atlas" target="_blank" rel="noopener">
+        View on GitHub
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+    </section>
+
+    <!-- Oracle -->
+    <section class="card oracle">
+      <div class="card-head">
+        <div>
+          <p class="kicker">AI Dungeon Master</p>
+          <h2>Oracle</h2>
+        </div>
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="22" stroke="currentColor" stroke-width="3" stroke-dasharray="86 17" stroke-dashoffset="-6"/>
+            <path fill="var(--oracle-gold)" d="M32 4 c3 5 5 8 5 12 a5 5 0 0 1 -10 0 c0 -2.7 1.6 -4.6 2.6 -6.2 c0.4 1.7 1.2 2.1 1.2 3 c0 -3 0.4 -5.8 1.2 -8.8 z"/>
+            <circle cx="32" cy="32" r="3.2" fill="var(--oracle-gold)"/>
+          </svg>
+        </span>
+      </div>
+      <p class="desc">An LLM in the GM seat, adjudicating rules and narrating a real-time tabletop session — 5e HP, AC, XP, and spell slots computed by the engine, never guessed at by the model.</p>
+      <ul class="chips">
+        <li>Textual TUI</li><li>Multiplayer over websockets</li><li>D&amp;D 5e SRD rules</li><li>Claude or local Ollama</li>
+      </ul>
+      <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/oracle.git
+<span class="c">$</span> cd oracle &amp;&amp; <span class="p">pip install -e ".[ollama]"</span></pre>
+      <p class="note">Two terminals, server + client — full walkthrough in the README.</p>
+      <a class="cta" href="https://github.com/Cyb3rRon1n/oracle" target="_blank" rel="noopener">
+        View on GitHub
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
       </a>
     </section>
@@ -653,36 +548,20 @@
   </div>
 </div>
 
-<div class="more wrap">
-  <h2>Also from the forge</h2>
-  <div class="more-grid">
-
-    <div class="more-card">
-      <h3>Atlas</h3>
-      <p>AI-powered operations platform for self-hosted infrastructure — Proxmox, Docker, monitoring, all driven from one CLI.</p>
-      <a href="https://github.com/Cyb3rRon1n/atlas" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://cyb3rron1n.github.io/atlas/" target="_blank" rel="noopener">Docs</a>
-    </div>
-
-    <div class="more-card">
-      <h3>Oracle</h3>
-      <p>An AI Dungeon Master for real-time tabletop sessions — an LLM in the GM seat, adjudicating rules and narrating the world over a terminal UI.</p>
-      <a href="https://github.com/Cyb3rRon1n/oracle" target="_blank" rel="noopener">GitHub</a>
-    </div>
-
-  </div>
-</div>
-
 <footer class="wrap">
+  <div class="foot-mark">
+    <svg viewBox="0 0 200 200" fill="currentColor" aria-hidden="true"><path d="M 32.45,75.41 L 34.89,69.96 L 37.74,64.73 L 41.01,59.76 L 44.68,55.10 L 48.72,50.77 L 53.10,46.81 L 57.79,43.24 L 62.75,40.10 L 67.95,37.39 L 73.34,35.15 L 78.89,33.37 L 84.55,32.09 L 90.29,31.29 L 96.04,30.98 L 101.78,31.16 L 107.47,31.82 L 113.05,32.95 L 118.50,34.55 L 123.77,36.59 L 128.82,39.06 L 133.64,41.92 L 138.17,45.16 L 142.41,48.75 L 146.31,52.67 L 149.86,56.87 L 153.05,61.33 L 155.84,66.01 L 158.24,70.89 L 160.22,75.92 L 161.78,81.07 L 162.92,86.32 L 163.63,91.62 L 163.92,96.95 L 163.77,102.26 L 163.21,107.53 L 162.23,112.73 L 160.85,117.83 L 159.07,122.79 L 156.91,127.58 L 154.37,132.19 L 151.48,136.57 L 148.25,140.72 L 144.71,144.59 L 140.87,148.17 L 136.75,151.43 L 132.38,154.35 L 127.78,156.92 L 122.99,159.11 L 118.02,160.91 L 112.92,162.31 L 107.72,163.28 L 102.44,163.83 L 97.12,163.94 L 91.80,163.61 L 86.52,162.84 L 81.31,161.63 L 76.20,159.98 L 71.25,157.91 L 66.47,155.42 L 61.92,152.53 L 57.62,149.26 L 53.61,145.63 L 49.92,141.67 L 46.59,137.40 L 49.04,135.68 L 52.37,139.63 L 56.02,143.27 L 59.94,146.56 L 64.12,149.50 L 68.51,152.05 L 73.08,154.21 L 77.79,155.97 L 82.61,157.32 L 87.50,158.25 L 92.43,158.77 L 97.35,158.87 L 102.24,158.57 L 107.06,157.86 L 111.78,156.77 L 116.37,155.31 L 120.80,153.49 L 125.05,151.32 L 129.09,148.83 L 132.90,146.04 L 136.45,142.97 L 139.74,139.63 L 142.74,136.06 L 145.44,132.28 L 147.82,128.31 L 149.88,124.18 L 151.60,119.90 L 152.97,115.52 L 153.99,111.05 L 154.65,106.51 L 154.96,101.95 L 154.90,97.38 L 154.48,92.83 L 153.70,88.33 L 152.56,83.90 L 151.07,79.58 L 149.23,75.39 L 147.06,71.35 L 144.57,67.51 L 141.77,63.87 L 138.68,60.47 L 135.31,57.33 L 131.69,54.48 L 127.84,51.93 L 123.78,49.71 L 119.55,47.84 L 115.17,46.33 L 110.67,45.19 L 106.09,44.43 L 101.45,44.07 L 96.80,44.11 L 92.16,44.54 L 87.58,45.37 L 83.08,46.59 L 78.71,48.20 L 74.49,50.17 L 70.47,52.50 L 66.66,55.17 L 63.10,58.16 L 59.82,61.43 L 56.85,64.98 L 54.20,68.76 L 51.89,72.75 L 49.96,76.91 L 48.43,81.23 Z"/><circle cx="152" cy="120" r="6" fill="#c23b28"/></svg>
+    <span>Foundry</span>
+  </div>
   <p>
-    Same method, different builds: both read your real hardware before they
-    write a single line of compose, and neither hands the sizing decision to
-    a model. Pick the one that matches what you're actually running.
+    Five tools, one maker — each cast for exactly what it has to do, and
+    honest in the README about what's shipped versus what's still open.
   </p>
   <div class="links">
     <a href="https://github.com/Cyb3rRon1n/vulcan" target="_blank" rel="noopener">github.com/Cyb3rRon1n/vulcan</a>
     <a href="https://github.com/Cyb3rRon1n/anvil" target="_blank" rel="noopener">github.com/Cyb3rRon1n/anvil</a>
     <a href="https://github.com/Cyb3rRon1n/atlas" target="_blank" rel="noopener">github.com/Cyb3rRon1n/atlas</a>
+    <a href="https://github.com/Cyb3rRon1n/oracle" target="_blank" rel="noopener">github.com/Cyb3rRon1n/oracle</a>
     <a href="https://github.com/Cyb3rRon1n/dojo" target="_blank" rel="noopener">github.com/Cyb3rRon1n/dojo</a>
   </div>
 </footer>
