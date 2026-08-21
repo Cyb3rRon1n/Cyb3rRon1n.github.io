@@ -416,11 +416,13 @@
         into your shell profile and puts a live token status in every
         prompt — usage, cache refresh, and how close you are to the context
         window. Paste it, follow the prompt to log in to GitHub (SSH key or
-        a browser code), and it clones your projects too.
+        a browser code), and it clones your projects too. Native on Windows
+        too — no WSL required.
       </p>
     </div>
     <div class="start-cmd">
-      <pre class="term"><span class="c">$</span> bash &lt;(curl -fsSL <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.sh</span>)</pre>
+      <pre class="term"><span class="c">$</span> bash &lt;(curl -fsSL <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.sh</span>)  <span class="c"># Linux/macOS</span>
+<span class="c">$</span> powershell -c "irm <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.ps1</span> | iex"  <span class="c"># Windows</span></pre>
       <a class="cta" href="https://github.com/Cyb3rRon1n/dojo" target="_blank" rel="noopener">
         View Dojo on GitHub
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
