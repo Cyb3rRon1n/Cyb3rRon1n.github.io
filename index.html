@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Foundry</title>
-<meta name="description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master on real computed game mechanics, Delphi explains the reasoning behind a self-study practice question, and Dojo sets up your AI coding tools on a fresh machine with live token usage in every terminal prompt.">
+<meta name="description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master in your browser on real computed game mechanics, Delphi explains the reasoning behind a self-study practice question, and Dojo sets up your AI coding tools on a fresh machine with live token usage in every terminal prompt.">
 <meta property="og:title" content="Foundry">
-<meta property="og:description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master on real computed game mechanics, Delphi explains the reasoning behind a self-study practice question, and Dojo sets up your AI coding tools on a fresh machine with live token usage in every terminal prompt.">
+<meta property="og:description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master in your browser on real computed game mechanics, Delphi explains the reasoning behind a self-study practice question, and Dojo sets up your AI coding tools on a fresh machine with live token usage in every terminal prompt.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
 
@@ -556,13 +556,15 @@
           </svg>
         </span>
       </div>
-      <p class="desc">An LLM in the GM seat, adjudicating rules and narrating a real-time tabletop session — 5e HP, AC, XP, and spell slots computed by the engine, never guessed at by the model.</p>
+      <p class="desc">An LLM in the GM seat, narrating and adjudicating a real-time tabletop session in your browser — 5e HP, AC, XP, and spell slots computed by the engine, never guessed at by the model. Two-phase turns keep structured decisions schema-constrained and the prose free.</p>
       <ul class="chips">
-        <li>Textual TUI</li><li>Multiplayer over websockets</li><li>D&amp;D 5e SRD rules</li><li>Claude or local Ollama</li>
+        <li>React web client</li><li>Multiplayer over websockets</li><li>D&amp;D 5e SRD rules</li><li>Claude, local Ollama, or any OpenAI-compatible API</li>
       </ul>
       <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/oracle.git
-<span class="c">$</span> cd oracle &amp;&amp; <span class="p">pip install -e ".[ollama]"</span></pre>
-      <p class="note">Two terminals, server + client — full walkthrough in the README.</p>
+<span class="c">$</span> cd oracle &amp;&amp; <span class="p">pip install -e ".[ollama]"</span>
+<span class="c">$</span> <span class="p">python -m server.main</span>
+<span class="c">$</span> cd web &amp;&amp; <span class="p">npm ci &amp;&amp; npm run dev</span></pre>
+      <p class="note">One server, any number of browser windows — share a session id to play together.</p>
       <a class="cta" href="https://github.com/Cyb3rRon1n/oracle" target="_blank" rel="noopener">
         View on GitHub
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
