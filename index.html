@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Foundry</title>
-<meta name="description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master in your browser on real computed game mechanics, Delphi explains the reasoning behind a self-study practice question, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
+<meta name="description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master in your browser on real computed game mechanics, Nightwire runs a cyberpunk tabletop RPG with an AI game master in the browser, Delphi explains the reasoning behind a self-study practice question, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
 <meta property="og:title" content="Foundry">
-<meta property="og:description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master in your browser on real computed game mechanics, Delphi explains the reasoning behind a self-study practice question, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
+<meta property="og:description" content="Cyb3rRon1n's open-source tools: Vulcan and Anvil size a Docker stack to your real hardware, Atlas verifies self-hosted infrastructure against reality instead of mocks, Oracle runs an AI Dungeon Master in your browser on real computed game mechanics, Nightwire runs a cyberpunk tabletop RPG with an AI game master in the browser, Delphi explains the reasoning behind a self-study practice question, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
+
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
 
@@ -59,6 +60,11 @@
     --delphi-soft: rgba(137, 180, 250, 0.16);
     --delphi-ink: #0c1f3d;
 
+    --nightwire: #ff006e;    /* Nightwire */
+    --nightwire-strong: #ff4d94;
+    --nightwire-soft: rgba(255, 0, 110, 0.16);
+    --nightwire-ink: #3d0a1f;
+
     --seal: #c23b28;         /* Dojo's hanko stamp — used only in the start band */
     --focus: #ffd166;
 
@@ -69,6 +75,7 @@
     --temper-bright: #5cb0f5;
     --atlas-bright: #7ecbda;
     --oracle-bright: #bda3f6;
+    --nightwire-bright: #ff6b9d;
     --delphi-bright: #a9c8fc;
 
     --font-display: "Big Shoulders", "Arial Narrow", sans-serif;
@@ -111,6 +118,11 @@
       --delphi-strong: #2c54a8;
       --delphi-soft: rgba(59, 111, 214, 0.12);
       --delphi-ink: #eef3fd;
+
+      --nightwire: #d61d5c;
+      --nightwire-strong: #a6164a;
+      --nightwire-soft: rgba(214, 29, 92, 0.12);
+      --nightwire-ink: #fce9f3;
     }
   }
 
@@ -148,6 +160,11 @@
     --delphi-strong: #2c54a8;
     --delphi-soft: rgba(59, 111, 214, 0.12);
     --delphi-ink: #eef3fd;
+
+    --nightwire: #d61d5c;
+    --nightwire-strong: #a6164a;
+    --nightwire-soft: rgba(214, 29, 92, 0.12);
+    --nightwire-ink: #fce9f3;
   }
 
   * { box-sizing: border-box; }
@@ -332,6 +349,7 @@
   .card.anvil  { --accent: var(--temper); --accent-strong: var(--temper-strong); --accent-soft: var(--temper-soft); --accent-ink: var(--temper-ink); }
   .card.atlas  { --accent: var(--atlas);  --accent-strong: var(--atlas-strong);  --accent-soft: var(--atlas-soft);  --accent-ink: var(--atlas-ink); }
   .card.oracle { --accent: var(--oracle); --accent-strong: var(--oracle-strong); --accent-soft: var(--oracle-soft); --accent-ink: var(--oracle-ink); }
+  .card.nightwire { --accent: var(--nightwire); --accent-strong: var(--nightwire-strong); --accent-soft: var(--nightwire-soft); --accent-ink: var(--nightwire-ink); }
   .card.delphi { --accent: var(--delphi); --accent-strong: var(--delphi-strong); --accent-soft: var(--delphi-soft); --accent-ink: var(--delphi-ink); }
 
   .card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--accent-soft), transparent 42%); pointer-events: none; }
@@ -351,6 +369,7 @@
   .card.anvil  pre.term .p { color: var(--temper-bright); }
   .card.atlas  pre.term .p { color: var(--atlas-bright); }
   .card.oracle pre.term .p { color: var(--oracle-bright); }
+  .card.nightwire pre.term .p { color: var(--nightwire-bright); }
   .card.delphi pre.term .p { color: var(--delphi-bright); }
   pre.term .c { opacity: 0.6; }
   .card .note { position: relative; margin: -0.3rem 0 0; font-size: 0.8rem; color: var(--muted); }
@@ -436,7 +455,7 @@
 
 <div class="hero wrap">
   <div class="hero-glow" aria-hidden="true"></div>
-  <p class="eyebrow">One maker, five tools — four computed, one explained</p>
+  <p class="eyebrow">One maker, six tools — five computed, one explained</p>
   <h1>Built on what's <em>real</em>,<br>not assumed.</h1>
   <p class="lede">
     Every tool here inspects the real system before it acts on it, or computes
@@ -574,6 +593,34 @@
       </a>
     </section>
 
+    <!-- Nightwire -->
+    <section class="card nightwire">
+      <div class="card-head">
+        <div>
+          <p class="kicker">Cyberpunk tabletop RPG</p>
+          <h2>Nightwire</h2>
+        </div>
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 24h24M8 20h32M8 28h32M20 12v24M28 12v24"/>
+            <circle cx="12" cy="24" r="2.4"/>
+            <circle cx="36" cy="24" r="2.4"/>
+          </svg>
+        </span>
+      </div>
+      <p class="desc">A cyberpunk tabletop RPG with an AI game master — playable solo or with friends, in a browser.</p>
+      <ul class="chips">
+        <li>Ollama qwen3:8b</li><li>WebSocket / FastAPI server</li><li>Next.js frontend</li><li>Structured JSON narration</li>
+      </ul>
+      <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/nightwire.git
+<span class="c">$</span> cd nightwire &amp;&amp; <span class="p">pip install -e ".[dev]"</span></pre>
+      <p class="note">Two terminals, server + frontend — full walkthrough in the README.</p>
+      <a class="cta" href="https://github.com/Cyb3rRon1n/nightwire" target="_blank" rel="noopener">
+        View on GitHub
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+    </section>
+
     <!-- Delphi -->
     <section class="card delphi">
       <div class="card-head">
@@ -611,7 +658,7 @@
     <span>Foundry</span>
   </div>
   <p>
-    Six tools, one maker — each cast for exactly what it has to do, and
+    Seven tools, one maker — each cast for exactly what it has to do, and
     honest in the README about what's shipped versus what's still open.
   </p>
   <div class="links">
@@ -619,6 +666,7 @@
     <a href="https://github.com/Cyb3rRon1n/anvil" target="_blank" rel="noopener">github.com/Cyb3rRon1n/anvil</a>
     <a href="https://github.com/Cyb3rRon1n/atlas" target="_blank" rel="noopener">github.com/Cyb3rRon1n/atlas</a>
     <a href="https://github.com/Cyb3rRon1n/oracle" target="_blank" rel="noopener">github.com/Cyb3rRon1n/oracle</a>
+    <a href="https://github.com/Cyb3rRon1n/nightwire" target="_blank" rel="noopener">github.com/Cyb3rRon1n/nightwire</a>
     <a href="https://github.com/Cyb3rRon1n/delphi" target="_blank" rel="noopener">github.com/Cyb3rRon1n/delphi</a>
     <a href="https://github.com/Cyb3rRon1n/dojo" target="_blank" rel="noopener">github.com/Cyb3rRon1n/dojo</a>
   </div>
