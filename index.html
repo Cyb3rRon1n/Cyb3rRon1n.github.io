@@ -59,6 +59,11 @@
     --delphi-soft: rgba(137, 180, 250, 0.16);
     --delphi-ink: #0c1f3d;
 
+    --nightwire: #ff006e;    /* Nightwire */
+    --nightwire-strong: #ff4d94;
+    --nightwire-soft: rgba(255, 0, 110, 0.16);
+    --nightwire-ink: #3d0a1f;
+
     --seal: #c23b28;         /* Dojo's hanko stamp — used only in the start band */
     --focus: #ffd166;
 
@@ -69,6 +74,7 @@
     --temper-bright: #5cb0f5;
     --atlas-bright: #7ecbda;
     --oracle-bright: #bda3f6;
+    --nightwire-bright: #ff6b9d;
     --delphi-bright: #a9c8fc;
 
     --font-display: "Big Shoulders", "Arial Narrow", sans-serif;
@@ -111,6 +117,11 @@
       --delphi-strong: #2c54a8;
       --delphi-soft: rgba(59, 111, 214, 0.12);
       --delphi-ink: #eef3fd;
+
+      --nightwire: #d61d5c;
+      --nightwire-strong: #a6164a;
+      --nightwire-soft: rgba(214, 29, 92, 0.12);
+      --nightwire-ink: #fce9f3;
     }
   }
 
@@ -148,6 +159,11 @@
     --delphi-strong: #2c54a8;
     --delphi-soft: rgba(59, 111, 214, 0.12);
     --delphi-ink: #eef3fd;
+
+    --nightwire: #d61d5c;
+    --nightwire-strong: #a6164a;
+    --nightwire-soft: rgba(214, 29, 92, 0.12);
+    --nightwire-ink: #fce9f3;
   }
 
   * { box-sizing: border-box; }
@@ -332,6 +348,7 @@
   .card.anvil  { --accent: var(--temper); --accent-strong: var(--temper-strong); --accent-soft: var(--temper-soft); --accent-ink: var(--temper-ink); }
   .card.atlas  { --accent: var(--atlas);  --accent-strong: var(--atlas-strong);  --accent-soft: var(--atlas-soft);  --accent-ink: var(--atlas-ink); }
   .card.oracle { --accent: var(--oracle); --accent-strong: var(--oracle-strong); --accent-soft: var(--oracle-soft); --accent-ink: var(--oracle-ink); }
+  .card.nightwire { --accent: var(--nightwire); --accent-strong: var(--nightwire-strong); --accent-soft: var(--nightwire-soft); --accent-ink: var(--nightwire-ink); }
   .card.delphi { --accent: var(--delphi); --accent-strong: var(--delphi-strong); --accent-soft: var(--delphi-soft); --accent-ink: var(--delphi-ink); }
 
   .card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--accent-soft), transparent 42%); pointer-events: none; }
@@ -351,6 +368,7 @@
   .card.anvil  pre.term .p { color: var(--temper-bright); }
   .card.atlas  pre.term .p { color: var(--atlas-bright); }
   .card.oracle pre.term .p { color: var(--oracle-bright); }
+  .card.nightwire pre.term .p { color: var(--nightwire-bright); }
   .card.delphi pre.term .p { color: var(--delphi-bright); }
   pre.term .c { opacity: 0.6; }
   .card .note { position: relative; margin: -0.3rem 0 0; font-size: 0.8rem; color: var(--muted); }
@@ -564,6 +582,33 @@
 <span class="c">$</span> cd oracle &amp;&amp; <span class="p">pip install -e ".[ollama]"</span></pre>
       <p class="note">Two terminals, server + client — full walkthrough in the README.</p>
       <a class="cta" href="https://github.com/Cyb3rRon1n/oracle" target="_blank" rel="noopener">
+        View on GitHub
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+    </section>
+
+    <!-- Nightwire -->
+    <section class="card nightwire">
+      <div class="card-head">
+        <div>
+          <p class="kicker">Cyberpunk tabletop RPG</p>
+          <h2>Nightwire</h2>
+        </div>
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 24h24M8 20h32M8 28h32M20 12v24M28 12v24"/>
+            <circle cx="12" cy="24" r="2.4"/>
+            <circle cx="36" cy="24" r="2.4"/>
+          </svg>
+        </span>
+      </div>
+      <p class="desc">A cyberpunk tabletop RPG with an AI game master — playable solo or with friends, in a browser.</p>
+      <ul class="chips">
+        <li>Browser-playable</li><li>Solo or multiplayer</li><li>AI Narrator</li><li>Web-first</li>
+      </ul>
+      <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/nightwire.git
+<span class="c">$</span> cd nightwire &amp;&amp; <span class="p">npm install &amp;&amp; npm start</span></pre>
+      <a class="cta" href="https://github.com/Cyb3rRon1n/nightwire" target="_blank" rel="noopener">
         View on GitHub
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
       </a>
