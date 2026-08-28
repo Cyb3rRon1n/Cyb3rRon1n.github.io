@@ -267,15 +267,6 @@
   .start-cmd a.cta:hover { background: #9c2e1f; }
   .start-cmd a.cta svg { width: 1em; height: 1em; }
 
-  /* Dojo menu screenshots — rendered captures of the whiptail UI */
-  .menu-shots { margin-top: 1.6rem; display: grid; gap: 1.2rem; }
-  .menu-shots .shots-main { max-width: 720px; }
-  .menu-shots .shots-main img,
-  .menu-shots .shots-sub img { display: block; width: 100%; height: auto; background: #06070a; border: 1px solid var(--line); border-radius: 6px; }
-  .menu-shots figcaption { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
-  .shots-sub { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
-  @media (min-width: 700px) { .shots-sub { grid-template-columns: 1fr 1fr; } }
-
   /* ---------------------------------------------------------------
      Hero — the thesis every card below backs up
   ----------------------------------------------------------------- */
@@ -458,30 +449,6 @@
         View Dojo on GitHub
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
       </a>
-    </div>
-  </div>
-  <div class="menu-shots">
-    <figure class="shots-main">
-      <img src="assets/dojo-menu-main.svg" alt="dojo Main Menu">
-      <figcaption>Main Menu — guided setup, install, login, services, workspace, status, tokens</figcaption>
-    </figure>
-    <div class="shots-sub">
-      <figure>
-        <img src="assets/dojo-menu-install.svg" alt="Install Tools submenu">
-        <figcaption>Install Tools — pick a group, tick which agents to install</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/dojo-menu-login.svg" alt="Login submenu">
-        <figcaption>Login — GitHub + each tool, skipped when already authed</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/dojo-menu-services.svg" alt="Services submenu">
-        <figcaption>Services — RTK, graphify, serena, uv, gh, ssh-agent wiring</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/dojo-menu-workspace.svg" alt="Workspace submenu">
-        <figcaption>Workspace — clone / update / add your multi-repo workspace</figcaption>
-      </figure>
     </div>
   </div>
 </div>
