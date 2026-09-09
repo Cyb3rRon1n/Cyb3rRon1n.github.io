@@ -320,8 +320,13 @@
     </div>
     <div class="start-cmd">
       <div class="term-wrap">
-        <pre class="term"><span class="c">$</span> bash &lt;(curl -fsSL <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.sh</span>)  <span class="c"># Linux/macOS</span>
-<span class="c">$</span> powershell -ExecutionPolicy ByPass -c "irm <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.ps1</span> | iex"  <span class="c"># Windows</span></pre>
+        <pre class="term"><span class="c">$</span> bash &lt;(curl -fsSL <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.sh</span>)  <span class="c"># Linux/macOS</span></pre>
+        <button class="copy-btn" type="button" aria-label="Copy command" onclick="copyTerm(this)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
+        </button>
+      </div>
+      <div class="term-wrap">
+        <pre class="term"><span class="c">$</span> powershell -ExecutionPolicy ByPass -c "irm <span class="p">https://raw.githubusercontent.com/Cyb3rRon1n/dojo/main/install.ps1</span> | iex"  <span class="c"># Windows</span></pre>
         <button class="copy-btn" type="button" aria-label="Copy command" onclick="copyTerm(this)">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
         </button>
@@ -547,7 +552,13 @@
       </ul>
       <div class="term-wrap">
         <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/delphi.git
-<span class="c">$</span> cd delphi &amp;&amp; <span class="p">./install.sh</span>  <span class="c"># Linux/macOS</span>
+<span class="c">$</span> cd delphi &amp;&amp; <span class="p">./install.sh</span>  <span class="c"># Linux/macOS</span></pre>
+        <button class="copy-btn" type="button" aria-label="Copy command" onclick="copyTerm(this)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
+        </button>
+      </div>
+      <div class="term-wrap">
+        <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/delphi.git
 <span class="c">$</span> cd delphi; <span class="p">.\install.ps1</span>  <span class="c"># Windows</span></pre>
         <button class="copy-btn" type="button" aria-label="Copy command" onclick="copyTerm(this)">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
