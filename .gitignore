@@ -1,0 +1,4 @@
+# Secrets - env files with real API keys / tokens, never committed.
+.env
+.env.*
+!.env.example
