@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Foundry</title>
-<meta name="description" content="Cyb3rRon1n's open-source tools: Vulcan sizes a Docker media stack to your real hardware, Lanxang verifies self-hosted infrastructure against reality instead of mocks, Nightwire runs a cyberpunk tabletop RPG with an AI game master in the browser, Trials runs voted trial shows for Jellyfin, Ebook Server is a self-hosted library with Send to Kindle, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
+<meta name="description" content="Cyb3rRon1n's open-source tools: Vulcan sizes a Docker media stack to your real hardware, Lanxang watches every device, cable and change on your home network, Nightwire runs a cyberpunk tabletop RPG with an AI game master in the browser, Trials runs voted trial shows for Jellyfin, Ebook Server is a self-hosted library with Send to Kindle, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
 <meta property="og:title" content="Foundry">
-<meta property="og:description" content="Cyb3rRon1n's open-source tools: Vulcan sizes a Docker media stack to your real hardware, Lanxang verifies self-hosted infrastructure against reality instead of mocks, Nightwire runs a cyberpunk tabletop RPG with an AI game master in the browser, Trials runs voted trial shows for Jellyfin, Ebook Server is a self-hosted library with Send to Kindle, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
+<meta property="og:description" content="Cyb3rRon1n's open-source tools: Vulcan sizes a Docker media stack to your real hardware, Lanxang watches every device, cable and change on your home network, Nightwire runs a cyberpunk tabletop RPG with an AI game master in the browser, Trials runs voted trial shows for Jellyfin, Ebook Server is a self-hosted library with Send to Kindle, and Dojo warms up your AI coding tools on a fresh machine and keeps them tuned for token efficiency.">
 
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
@@ -36,7 +36,7 @@
     --focus: #6ea8fe;
 
     --ember: #ff7a3d;        /* Vulcan */
-    --atlas: #5cb3c4;        /* Atlas */
+    --lanxang: #5ec2a4;      /* Lanxang */
     --nightwire: #ff4d94;    /* Nightwire */
     --trials: #f5c451;       /* Trials */
     --ebook: #5fd38d;        /* Ebook Server */
@@ -56,7 +56,7 @@
       --line: #e2e5ea;
 
       --ember: #c1500f;
-      --atlas: #10707d;
+      --lanxang: #1e7f66;
       --nightwire: #c11760;
     --trials: #9a6a00;
     --ebook: #1d7d47;
@@ -74,7 +74,7 @@
     --line: #e2e5ea;
 
     --ember: #c1500f;
-    --atlas: #10707d;
+    --lanxang: #1e7f66;
     --nightwire: #c11760;
     --seal: #b6371f;
   }
@@ -150,6 +150,7 @@
   }
   .start-desc { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 54ch; }
   .start-cmd { flex: 1 1 22rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .card.lanxang pre.term { white-space: pre-wrap; word-break: break-all; }
   .start-cmd pre.term { font-size: 0.78rem; white-space: pre-wrap; word-break: break-all; }
   .start-cmd pre.term .p { color: #ff8f66; }
   .start-cmd a.cta {
@@ -209,6 +210,7 @@
   }
 
   .card {
+    min-width: 0;
     --accent: var(--ember);
     background: var(--surface);
     border: 1px solid var(--line);
@@ -218,7 +220,7 @@
     flex-direction: column;
     gap: 1rem;
   }
-  .card.atlas     { --accent: var(--atlas); }
+  .card.lanxang     { --accent: var(--lanxang); }
   .card.nightwire { --accent: var(--nightwire); }
   .card.trials    { --accent: var(--trials); }
   .card.ebook     { --accent: var(--ebook); }
@@ -257,7 +259,7 @@
 
   pre.term { margin: 0; padding: 0.85rem 2.2rem 0.85rem 1rem; background: #0d0f12; border: 1px solid var(--line); color: #cfd4dc; font-family: var(--font-mono); font-size: 0.79rem; line-height: 1.6; overflow-x: auto; }
   pre.term .p { color: #ffb27a; }
-  .card.atlas     pre.term .p { color: #85d3e0; }
+  .card.lanxang     pre.term .p { color: #85d3e0; }
   .card.nightwire pre.term .p { color: #ff8dbb; }
   .card.trials    pre.term .p { color: #f8d68a; }
   .card.ebook     pre.term .p { color: #93e3b2; }
@@ -349,7 +351,7 @@
   </p>
   <ul class="values">
     <li style="--dot:var(--ember)"><b>Vulcan</b>&nbsp;sized to real disk/RAM/CPU</li>
-    <li style="--dot:var(--atlas)"><b>Lanxang</b>&nbsp;verified on real infra, not mocks</li>
+    <li style="--dot:var(--lanxang)"><b>Lanxang</b>&nbsp;every device on your home network, watched over</li>
     <li style="--dot:var(--nightwire)"><b>Nightwire</b>&nbsp;an AI game master, solo or with friends</li>
     <li style="--dot:var(--trials)"><b>Trials</b>&nbsp;keeps what real viewers voted for</li>
     <li style="--dot:var(--ebook)"><b>Ebook Server</b>&nbsp;one setup script, stock Kindles</li>
@@ -391,37 +393,30 @@
     </section>
 
 
-    <!-- Atlas -->
-    <section class="card atlas">
+    <!-- Lanxang -->
+    <section class="card lanxang">
       <div class="card-head">
         <div>
-          <p class="kicker">Self-hosted ops platform</p>
+          <p class="kicker">Home network watchdog</p>
           <h2>Lanxang</h2>
         </div>
         <span class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="26" stroke="currentColor" stroke-width="2"/>
-            <ellipse cx="32" cy="32" rx="26" ry="10" stroke="currentColor" stroke-width="1.3" opacity="0.55"/>
-            <ellipse cx="32" cy="32" rx="12" ry="26" stroke="currentColor" stroke-width="1.3" opacity="0.55"/>
-            <g stroke="currentColor" stroke-width="1.6" opacity="0.85">
-              <line x1="14" y1="24" x2="32" y2="14"/><line x1="32" y1="14" x2="48" y2="22"/>
-              <line x1="14" y1="24" x2="22" y2="42"/><line x1="48" y1="22" x2="42" y2="46"/><line x1="22" y1="42" x2="42" y2="46"/>
-            </g>
-            <g fill="currentColor">
-              <circle cx="14" cy="24" r="2.4"/><circle cx="32" cy="14" r="2.4"/><circle cx="48" cy="22" r="2.4"/>
-              <circle cx="22" cy="42" r="2.4"/><circle cx="42" cy="46" r="2.4"/>
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10.4" stroke="currentColor" stroke-width="1.8"/>
+            <g transform="translate(4.8 4.8) scale(.6)">
+              <g transform="translate(1.2 2.6) scale(.9)" fill="currentColor"><path d="M3 6.6C3 4.9 4.2 4 6 4h2.6v9.8C6.4 13.8 4.9 13.2 4 12.1 3.3 11.2 3 10 3 8.8z"/><path d="M21 6.6C21 4.9 19.8 4 18 4h-2.6v9.8c2.2 0 3.7-.6 4.6-1.7.7-.9 1-2.1 1-3.3z"/><path d="M8.2 5.2C9.3 3.9 10.6 3.3 12 3.3s2.7.6 3.8 1.9v8.1c0 1.3-.8 2.2-2 2.5l-.6 5.1c-.1.8-.6 1.2-1.2 1.2s-1.1-.4-1.2-1.2l-.6-5.1c-1.2-.3-2-1.2-2-2.5z"/></g>
+              <g transform="translate(1.2 2.6) scale(.9)" fill="var(--surface)"><circle cx="10.2" cy="8.6" r=".95"/><circle cx="13.8" cy="8.6" r=".95"/></g>
+              <g transform="translate(9 -.6) scale(.25)" fill="#e9b44c"><path d="M12 12C9.4 9.8 8.2 6.4 9.6 4 10.6 2.4 13.4 2.4 14.4 4 15.8 6.4 14.6 9.8 12 12z" transform="rotate(0 12 12)"/><path d="M12 12C9.4 9.8 8.2 6.4 9.6 4 10.6 2.4 13.4 2.4 14.4 4 15.8 6.4 14.6 9.8 12 12z" transform="rotate(72 12 12)"/><path d="M12 12C9.4 9.8 8.2 6.4 9.6 4 10.6 2.4 13.4 2.4 14.4 4 15.8 6.4 14.6 9.8 12 12z" transform="rotate(144 12 12)"/><path d="M12 12C9.4 9.8 8.2 6.4 9.6 4 10.6 2.4 13.4 2.4 14.4 4 15.8 6.4 14.6 9.8 12 12z" transform="rotate(216 12 12)"/><path d="M12 12C9.4 9.8 8.2 6.4 9.6 4 10.6 2.4 13.4 2.4 14.4 4 15.8 6.4 14.6 9.8 12 12z" transform="rotate(288 12 12)"/><circle cx="12" cy="12" r="2.6"/></g>
             </g>
           </svg>
         </span>
       </div>
-      <p class="desc">Know what's running on your infrastructure and what changed — hypervisor and container discovery, AI-assisted analysis, approval-gated actions, verified against real infrastructure, never just mocks.</p>
+      <p class="desc">Every device on your home network, every cable and every change — a device inventory, a port-level cabling map, security posture and alerts where you already look, with an optional local AI. Nothing leaves home, and it never changes anything without asking.</p>
       <ul class="chips">
-        <li>Hypervisor discovery</li><li>Container discovery</li><li>Guest virtualization</li><li>Local or cloud AI analysis</li><li>Approval-gated actions</li><li>Metrics monitoring</li><li>Fleet view</li>
+        <li>Device inventory</li><li>Cabling map</li><li>Security posture</li><li>Alerts</li><li>Home Assistant</li><li>Proxmox &amp; Docker</li><li>Optional local AI</li>
       </ul>
       <div class="term-wrap">
-        <pre class="term"><span class="c">$</span> git clone https://github.com/Cyb3rRon1n/lanxang.git &amp;&amp; cd lanxang
-<span class="c">$</span> python -m venv .venv &amp;&amp; source .venv/bin/activate
-<span class="c">$</span> pip install -e . &amp;&amp; <span class="p">lanxang version</span></pre>
+        <pre class="term"><span class="c">$</span> curl -fsSL https://raw.githubusercontent.com/Cyb3rRon1n/lanxang/main/install.sh | bash</pre>
         <button class="copy-btn" type="button" aria-label="Copy command" onclick="copyTerm(this)">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
         </button>
